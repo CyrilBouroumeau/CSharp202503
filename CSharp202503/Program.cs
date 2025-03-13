@@ -16,13 +16,47 @@ else
     Console.WriteLine("ton mdp : " + reponse + "n'est pas robuste");
 }
 
+//tableau à 2 dimensions
+string[,] departements = {
+     {"01", "Ain"},
+     {"02", "Aisne"},
+     {"03", "Allier"},
+     {"04", "Alpes-de-Haute-Provence"},
+     {"2A", "Corse du Sud"},
+     {"16", "Charente"},
+     {"17", "Charente-Maritime"},
+};
 
 string continuer = "O";
-while (continuer == "O")
+while (continuer.ToUpper() == "O")
 {
     Console.WriteLine("Donne moi un numéro de département");
-    string departement = Console.ReadLine();
-    int departementint = Convert.ToInt16(departement);
+    string departementUser = Console.ReadLine();
+    if (departementUser.Length==1)
+    {
+        departementUser = "0" + departementUser;
+    }
+    bool trouve = false;
+    string numdepartement = "";
+    string nomdepartement = "";
+    for (int i = 0;i<departements.GetLength(0);i++)
+    {
+        numdepartement = departements[i,0];
+        nomdepartement = departements[i,1];
+        if (departementUser.ToUpper()== numdepartement.ToUpper())
+        {
+            Console.WriteLine(nomdepartement);
+            trouve = true;
+        }
+
+
+    }
+    if (trouve==false)
+    {
+        Console.WriteLine("Ce numéro de département: " + nomdepartement + " n'est pas valide");
+    }
+    //int departementint = Convert.ToInt16(departement);
+    /*
     switch (departementint)
 {
     case 1:
@@ -35,6 +69,7 @@ while (continuer == "O")
         Console.WriteLine("Departement inconnu");
         break;
 }
+    */
     Console.WriteLine("continuer ? (O/N): ");
     continuer = Console.ReadLine();
 }
