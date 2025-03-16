@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿#region testmdp
+// See https://aka.ms/new-console-template for more information
 Console.WriteLine("donne moi ton mdp à tester");
 string reponse = Console.ReadLine();
 int testmdpok = reponse.Length;
@@ -15,7 +16,9 @@ else
 {
     Console.WriteLine("ton mdp : " + reponse + "n'est pas robuste");
 }
+#endregion
 
+#region VariablesTableaux
 //tableau à 2 dimensions
 string[,] departements = {
      {"01", "Ain"},
@@ -26,7 +29,9 @@ string[,] departements = {
      {"16", "Charente"},
      {"17", "Charente-Maritime"},
 };
+#endregion
 
+#region ChercheDepartement
 string continuer = "O";
 while (continuer.ToUpper() == "O")
 {
@@ -36,25 +41,8 @@ while (continuer.ToUpper() == "O")
     {
         departementUser = "0" + departementUser;
     }
-    bool trouve = false;
-    string numdepartement = "";
-    string nomdepartement = "";
-    for (int i = 0;i<departements.GetLength(0);i++)
-    {
-        numdepartement = departements[i,0];
-        nomdepartement = departements[i,1];
-        if (departementUser.ToUpper()== numdepartement.ToUpper())
-        {
-            Console.WriteLine(nomdepartement);
-            trouve = true;
-        }
+    Console.WriteLine(getNomdepartementByNum(departementUser));
 
-
-    }
-    if (trouve==false)
-    {
-        Console.WriteLine("Ce numéro de département: " + nomdepartement + " n'est pas valide");
-    }
     //int departementint = Convert.ToInt16(departement);
     /*
     switch (departementint)
@@ -73,3 +61,31 @@ while (continuer.ToUpper() == "O")
     Console.WriteLine("continuer ? (O/N): ");
     continuer = Console.ReadLine();
 }
+#endregion
+
+#region fonctions
+/* char mafonction = fonction qui retourne un char
+ * void mafocntion = fonction qui ne retorune rien = procedure
+
+char mafonction(string Mondepartement)
+{
+    char firstletter = Mondepartement[0];
+    return firstletter;
+}
+ * */
+string getNomdepartementByNum(string UserDepartment)
+{
+    string numdepartement = "";
+    string nomdepartement = "";
+    for (int i = 0; i < departements.GetLength(0); i++)
+    {
+        numdepartement = departements[i, 0];
+        nomdepartement = departements[i, 1];
+        if (UserDepartment.ToUpper() == numdepartement.ToUpper())
+        {
+            return nomdepartement;
+        }
+    }
+    return "Ce numéro de département: " + UserDepartment + " n'est pas valide";
+}
+#endregion
